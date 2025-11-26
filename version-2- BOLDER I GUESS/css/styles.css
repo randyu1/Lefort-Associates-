@@ -1,0 +1,746 @@
+/* version 2 - going BOLD with this one
+   black white and ORANGE baby
+   trying to make it pop more than version 1 */
+
+/* reset all the default browser stuff */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* color scheme - super high contrast + that orange accent */
+    --pure-black: #000000;
+    --deep-black: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --medium-gray: #333333;
+    --light-gray: #cccccc;
+    --pure-white: #ffffff;
+    --off-white: #f7f7f7;
+    --accent-orange: #ff6b35; /* THIS is the money color right here */
+    --accent-dark-orange: #e8590c;
+    --accent-bright-orange: #ff8f66;
+    --text-white: #ffffff;
+    --text-gray: #b8b8b8;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--pure-black); /* pitch black background looks sick */
+    color: var(--text-white);
+    line-height: 1.6;
+    overflow-x: hidden; /* no sideways scrolling */
+}
+
+/* text and headings - going BOLD with the font weights */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700; /* HEAVY weight for impact */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--pure-white);
+    letter-spacing: 0px;
+}
+
+h1 { font-size: 3.8rem; }
+h2 { font-size: 2.8rem; }
+h3 { font-size: 1.9rem; }
+p { color: var(--text-gray); margin-bottom: 1rem; font-weight: 400; }
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* top navigation bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 5%;
+    background: var(--pure-black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* when scrolled - orange border looks fire */
+.navbar.scrolled {
+    padding: 1rem 5%;
+    border-bottom: 1px solid var(--accent-orange); /* orange line when u scroll */
+    box-shadow: 0 2px 15px rgba(255, 107, 53, 0.2); /* orange glow effect */
+}
+
+.logo {
+    height: 110px;
+    position: relative;
+    z-index: 1001;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 3px 8px rgba(255, 107, 53, 0.3)); /* orange shadow on logo */
+    margin: -15px 0; /* negative margin to center it better */
+}
+
+.logo:hover {
+    transform: scale(1.05); /* grows when u hover over it */
+    filter: drop-shadow(0 5px 15px rgba(255, 107, 53, 0.5)); /* MORE orange glow on hover */
+}
+
+.navbar.scrolled .logo {
+    height: 90px;
+    margin: -10px 0;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--pure-white);
+    font-size: 1rem;
+    font-weight: 600; /* bolder text in nav */
+    letter-spacing: 0.5px;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+/* orange underline animation - way cooler than white */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; /* thicker line = more bold */
+    background: var(--accent-orange);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* line expands across */
+}
+
+.nav-links a.active::after {
+    width: 100%;
+    background: var(--accent-bright-orange); /* brighter orange for active page */
+}
+
+/* mobile hamburger menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px; /* thicker bars for mobile menu */
+    background: var(--pure-white);
+    transition: all 0.3s ease;
+}
+
+/* main hero image on homepage */
+.hero-image {
+    margin-top: 90px;
+    padding: 4rem 10%;
+    width: 100%;
+    overflow: hidden;
+    background: var(--pure-black);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-hero-img {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 53, 0.15); /* black + orange shadow combo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.home-hero-img:hover {
+    transform: translateY(-5px); /* lifts up on hover */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 107, 53, 0.3); /* BIGGER shadow */
+    border-color: var(--accent-orange); /* border turns orange */
+}
+
+/* about section with company info */
+.about-section {
+    background: var(--deep-black);
+    padding: 8rem 5%;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* gradient lines at top and bottom - adds some style */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-orange), transparent); /* fades in from sides */
+    opacity: 0.3;
+}
+
+.about-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+    opacity: 0.3;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 4rem;
+    background: rgba(26, 26, 26, 0.5); /* semi transparent background */
+    border: 1px solid rgba(255, 107, 53, 0.3); /* orange border around box */
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* gradient line at top of container */
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.about-container h2 {
+    font-size: 2.8rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+    color: var(--pure-white);
+    letter-spacing: 1px;
+}
+
+/* orange underline under heading
+   why wasnt the transform working earlier ugh */
+.about-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%); /* FIXED!! centers it properly now */
+    width: 80px;
+    height: 2px;
+    background: var(--accent-orange);
+}
+
+.about-container p {
+    font-size: 1.15rem;
+    line-height: 2;
+    margin-bottom: 1.8rem;
+    color: var(--text-gray);
+    letter-spacing: 0.3px;
+    font-weight: 300;
+}
+
+/* general sections */
+.section {
+    padding: 5rem 5%;
+    min-height: 50vh;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 3.2rem;
+    color: var(--pure-white);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    font-weight: 700; /* BOLD titles */
+}
+
+/* orange underline bar */
+.section-title .underline {
+    width: 120px;
+    height: 3px; /* thick bar */
+    background: var(--accent-orange);
+    margin: 0 auto;
+    position: relative;
+}
+
+/* portfolio images grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* smooth easing curve */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* orange overlay that fades in on hover */
+.portfolio-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(232, 89, 12, 0.15) 100%);
+    opacity: 0; /* invisible by default */
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none; /* doesnt block clicks */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-8px); /* lifts up when hovered */
+    border-color: var(--accent-orange); /* orange border */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 107, 53, 0.3); /* orange glow around it */
+}
+
+.portfolio-item:hover::before {
+    opacity: 1; /* orange overlay shows */
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95); /* slightly darker */
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05); /* zooms in a bit */
+    filter: brightness(1.05); /* gets brighter */
+}
+
+/* featured work section */
+.featured-section {
+    background: var(--deep-black);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* button styling - white buttons that turn orange */
+.btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: var(--pure-white); /* starts white */
+    border: 2px solid var(--pure-white);
+    color: var(--pure-black); /* black text */
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* orange background slides in from left */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* starts off screen */
+    width: 100%;
+    height: 100%;
+    background: var(--accent-orange);
+    z-index: -1;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:hover::before {
+    left: 0; /* slides across */
+}
+
+.btn:hover {
+    color: var(--pure-white); /* white text */
+    border-color: var(--accent-orange); /* orange border */
+    transform: translateY(-3px); /* lifts up */
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); /* orange shadow */
+}
+
+/* call to action section */
+.cta-section {
+    background: var(--pure-black);
+}
+
+/* hero section for portfolio and contact pages */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--pure-black) 0%, var(--dark-gray) 50%, var(--medium-gray) 100%); /* gradient background */
+    z-index: -1;
+}
+
+/* subtle line pattern overlay - adds texture */
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 107, 53, 0.03) 2px, /* super faint orange lines */
+        rgba(255, 107, 53, 0.03) 4px
+    );
+}
+
+.hero-content {
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease; /* fades in on load */
+}
+
+.hero h1 {
+    font-size: 4.5rem; /* BIG title */
+    margin-bottom: 1.5rem;
+    color: var(--pure-white);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.hero .accent {
+    color: var(--accent-orange); /* orange accent text */
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.3); /* orange glow */
+}
+
+/* contact form */
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-form {
+    background: rgba(26, 26, 26, 0.8);
+    padding: 4rem;
+    border: 1px solid rgba(255, 107, 53, 0.3); /* orange border */
+    position: relative;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 53, 0.1); /* orange glow */
+}
+
+/* gradient line at top of form */
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--pure-white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--pure-black); /* black input fields */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--pure-white);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+/* orange border and glow when focused */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-orange); /* turns orange */
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.2); /* orange glow */
+}
+
+.form-group textarea {
+    min-height: 200px;
+    resize: vertical; /* can only resize vertically */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-gray);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.3rem;
+    background: var(--pure-white); /* white button */
+    color: var(--pure-black);
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent-orange); /* turns orange on hover */
+    color: var(--pure-white);
+    transform: translateY(-2px); /* lifts up */
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+}
+
+/* footer at bottom */
+.footer {
+    background: var(--pure-black);
+    padding: 2rem 5%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.footer .accent {
+    color: var(--accent-orange); /* orange company name */
+    font-weight: 600;
+}
+
+/* lightbox for clicking on images */
+.lightbox {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98); /* almost pure black */
+    backdrop-filter: blur(10px); /* blurs background */
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 95%;
+    max-height: 95vh;
+    object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 80px rgba(255, 107, 53, 0.2); /* orange glow around image */
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 3rem;
+    color: var(--pure-white);
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.3s ease;
+    font-weight: 300;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-orange); /* X turns orange when hovered */
+}
+
+/* fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE BREAKPOINTS - making it work on all devices */
+
+/* tablets */
+@media (max-width: 1024px) {
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.5rem; }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .portfolio-item {
+        height: 450px;
+    }
+}
+
+/* phones and small tablets */
+@media (max-width: 768px) {
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2rem; }
+
+    .navbar {
+        padding: 1rem 3%;
+    }
+
+    .menu-toggle {
+        display: flex; /* show hamburger menu */
+    }
+
+    /* mobile menu drops down from top */
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%; /* starts off screen */
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--pure-black);
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 0;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-links.active {
+        right: 0; /* slides in */
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* one column on mobile */
+        gap: 1.5rem;
+    }
+
+    .portfolio-item {
+        height: 400px;
+    }
+
+    .section {
+        padding: 4rem 3%;
+    }
+
+    .contact-form {
+        padding: 2.5rem;
+    }
+
+    .about-container {
+        padding: 3rem;
+    }
+}
+
+/* tiny phones */
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+
+    .btn {
+        padding: 1rem 2.5rem;
+        font-size: 0.9rem;
+    }
+
+    .logo {
+        height: 85px;
+        margin: -10px 0;
+    }
+
+    .navbar.scrolled .logo {
+        height: 70px;
+        margin: -8px 0;
+    }
+
+    .contact-form {
+        padding: 2rem;
+    }
+
+    .portfolio-item {
+        height: 300px;
+    }
+
+    .about-container {
+        padding: 2rem;
+    }
+}
