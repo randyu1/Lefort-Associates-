@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with Lefort Associates - Contact us for architectural design consultations and project inquiries">
+    <title>Contact - Lefort Associates</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html">
+            <img src="../lefort_images/logo-2.png" alt="Lefort Associates Logo" class="logo">
+        </a>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="page-hero">
+        <h1>Get In Touch</h1>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section class="contact-modern-section">
+        <div class="contact-container-modern">
+            <form class="contact-form-modern" id="contactForm">
+                <div class="form-group-modern">
+                    <label for="name">Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="John Doe"
+                        required
+                    >
+                </div>
+
+                <div class="form-group-modern">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="john.doe@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group-modern">
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+1 (555) 123-4567"
+                    >
+                </div>
+
+                <div class="form-group-modern">
+                    <label for="message">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us about your project..."
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn-modern">Send Message</button>
+
+                <div id="formMessage" style="margin-top: 1.5rem; text-align: center; display: none;"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-minimal">
+        <p>&copy; 2025 Lefort Associates. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+
+</body>
+</html>
