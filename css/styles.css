@@ -1,0 +1,705 @@
+/* okay so this is version 1 - trying to copy that jbmp website style
+   super clean and minimal vibes, just black and white basically
+   lets see if this works lol */
+
+/* gotta reset everything first or it gets messy */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* colors - keeping it dark and clean like that jbmp site */
+    --background-dark: #1a1a1a;
+    --background-darker: #0f0f0f;
+    --pure-white: #ffffff;
+    --light-gray: #f5f5f5;
+    --medium-gray: #999999;
+    --dark-gray: #666666;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --accent-color: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth; /* smooth scrolling is so much better */
+}
+
+body {
+    font-family: 'Source Sans Pro', 'Montserrat', -apple-system, sans-serif;
+    background: var(--background-dark);
+    color: var(--pure-white);
+    line-height: 1.8;
+    overflow-x: hidden; /* no horizontal scroll plz */
+}
+
+/* headings and text stuff */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif; /* this font is kinda fancy but looks professional */
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+    color: var(--pure-white);
+    letter-spacing: 2px;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.6rem; }
+
+p {
+    color: var(--medium-gray);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease; /* everything needs smooth transitions */
+}
+
+/* navigation bar at the top */
+.navbar {
+    position: fixed; /* stays at top when u scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    background: var(--background-dark);
+    border-bottom: 1px solid var(--border-subtle);
+    z-index: 1000; /* needs to be on top of everything */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* when u scroll down it gets a bit smaller */
+.navbar.scrolled {
+    padding: 0.8rem 5%;
+    background: rgba(26, 26, 26, 0.98);
+    backdrop-filter: blur(10px); /* adds blur effect to background, looks sick */
+}
+
+.logo {
+    height: 120px;
+    position: relative;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+    margin: 0;
+}
+
+.logo:hover {
+    opacity: 0.8; /* subtle hover effect */
+}
+
+.navbar.scrolled .logo {
+    height: 100px; /* smaller logo when scrolled */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem; /* space between menu items */
+}
+
+.nav-links a {
+    color: var(--pure-white);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+/* underline animation on hover - took forever to get this right */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--pure-white);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%; /* line goes across when u hover */
+}
+
+/* hamburger menu for mobile */
+.menu-toggle {
+    display: none; /* hidden on desktop */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+}
+
+.menu-toggle span {
+    width: 28px;
+    height: 1px;
+    background: var(--pure-white);
+    transition: all 0.3s ease;
+}
+
+/* main hero image on home page */
+.hero-image {
+    margin-top: 140px; /* gotta account for navbar */
+    padding: 3rem 5%;
+    width: 100%;
+    height: calc(100vh - 140px - 6rem);
+    overflow: hidden;
+    background: var(--background-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-hero-img {
+    width: 100%;
+    max-width: 1400px;
+    max-height: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain; /* keeps image proportions */
+    transition: opacity 0.3s ease;
+}
+
+.home-hero-img:hover {
+    opacity: 0.95; /* subtle hover effect on main image */
+}
+
+/* about section with the company info */
+.about-section {
+    background: var(--background-dark);
+    padding: 10rem 5%;
+    position: relative;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.about-container h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pure-white);
+}
+
+.about-container h2::after {
+    display: none; /* dont need that underline thing */
+}
+
+.about-container p {
+    font-size: 1.1rem;
+    line-height: 2;
+    margin-bottom: 2rem;
+    color: var(--medium-gray);
+    letter-spacing: 0.5px;
+    font-weight: 300;
+}
+
+.about-container .accent {
+    color: var(--pure-white);
+}
+
+/* general sections */
+.section {
+    padding: 8rem 5%;
+    min-height: 50vh;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 6rem;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: var(--pure-white);
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.section-title .underline {
+    display: none;
+}
+
+.section-title .accent {
+    color: var(--pure-white);
+}
+
+/* portfolio grid layout */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* automatically fits images */
+    gap: 3rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    height: 550px;
+    cursor: pointer; /* shows its clickable */
+    border: none;
+    box-shadow: none;
+    transition: all 0.4s ease;
+}
+
+.portfolio-item::before {
+    display: none;
+}
+
+.portfolio-item:hover {
+    transform: none; /* keeping it simple, no fancy transforms */
+    box-shadow: none;
+    border: none;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* makes images fill the box nicely */
+    transition: opacity 0.4s ease;
+    filter: brightness(0.95); /* slightly darker images */
+}
+
+.portfolio-item:hover img {
+    opacity: 0.85; /* fades a bit on hover */
+    transform: none;
+}
+
+/* featured work section */
+.featured-section {
+    background: var(--background-dark);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+/* buttons - clean minimal style */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1px solid var(--pure-white);
+    color: var(--pure-white);
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* button hover effect - background slides in from left
+   fuck why isnt this working */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--pure-white);
+    z-index: -1;
+    transition: left 0.3s ease;
+}
+
+.btn:hover::before {
+    left: 0; /* FIXED!! had to move it to 0 not 100% lol */
+}
+
+.btn:hover {
+    color: var(--background-dark); /* text turns dark when button fills */
+    transform: none;
+    box-shadow: none;
+}
+
+/* call to action section */
+.cta-section {
+    background: var(--background-dark);
+    padding: 6rem 5%;
+}
+
+/* hero for other pages like portfolio and contact */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-darker);
+    z-index: -1; /* behind everything else */
+}
+
+.hero-background::before {
+    display: none;
+}
+
+.hero-content {
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease; /* content fades in when page loads */
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--pure-white);
+    font-weight: 400;
+    letter-spacing: 4px;
+}
+
+.hero .accent {
+    color: var(--pure-white);
+}
+
+.hero p {
+    color: var(--medium-gray);
+}
+
+/* contact form styling */
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-form {
+    background: transparent;
+    padding: 4rem 2rem;
+    border-radius: 0; /* no rounded corners, keeping it sharp */
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: none;
+}
+
+.contact-form::before {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 2.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--pure-white);
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-subtle); /* just bottom border */
+    color: var(--pure-white);
+    font-size: 1rem;
+    font-family: inherit;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+/* when u click in a field it lights up */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-bottom: 1px solid var(--pure-white); /* brighter when focused */
+    box-shadow: none;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical; /* can only resize up and down */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--dark-gray); /* placeholder text color */
+}
+
+.submit-btn {
+    width: auto;
+    padding: 1rem 3rem;
+    background: transparent;
+    color: var(--pure-white);
+    border: 1px solid var(--pure-white);
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.submit-btn:hover {
+    background: var(--pure-white);
+    color: var(--background-dark); /* flips colors on hover */
+    transform: none;
+    box-shadow: none;
+}
+
+/* footer at bottom of page */
+.footer {
+    background: var(--background-dark);
+    padding: 4rem 5%;
+    text-align: center;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.footer p {
+    color: var(--medium-gray);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.footer .accent {
+    color: var(--pure-white);
+}
+
+/* image popup when u click on portfolio images */
+.lightbox {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95); /* almost black overlay */
+    backdrop-filter: none;
+    z-index: 10000; /* needs to be above everything */
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out; /* shows u can click to close */
+}
+
+.lightbox.active {
+    display: flex; /* shows up when active */
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: none;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2.5rem;
+    color: var(--pure-white);
+    cursor: pointer;
+    z-index: 10001;
+    transition: opacity 0.3s ease;
+    font-weight: 300;
+}
+
+.lightbox-close:hover {
+    opacity: 0.7; /* fades a bit when u hover */
+}
+
+/* fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* starts lower */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* moves up */
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0); /* shows when visible */
+}
+
+/* RESPONSIVE STUFF - making it work on different screens */
+
+/* tablets and smaller laptops */
+@media (max-width: 1024px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2.5rem;
+    }
+
+    .portfolio-item {
+        height: 500px;
+    }
+
+    .section {
+        padding: 6rem 4%;
+    }
+
+    .about-section {
+        padding: 8rem 4%;
+    }
+
+    .hero-image {
+        height: calc(100vh - 140px - 6rem);
+    }
+}
+
+/* phones and small tablets */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+
+    .navbar {
+        padding: 0.8rem 4%;
+    }
+
+    .menu-toggle {
+        display: flex; /* show hamburger menu */
+    }
+
+    /* mobile menu slides in from right */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* starts off screen */
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--background-darker);
+        flex-direction: column; /* stacks vertically */
+        align-items: flex-start;
+        padding: 6rem 2rem;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        border-left: 1px solid var(--border-subtle);
+    }
+
+    .nav-links.active {
+        right: 0; /* slides in when active */
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 2rem;
+    }
+
+    .portfolio-item {
+        height: 450px;
+    }
+
+    .section {
+        padding: 5rem 4%;
+    }
+
+    .about-section {
+        padding: 6rem 4%;
+    }
+
+    .hero-image {
+        padding: 2rem 4%;
+        margin-top: 120px;
+        height: calc(100vh - 120px - 4rem);
+    }
+
+    .contact-form {
+        padding: 3rem 1.5rem;
+    }
+}
+
+/* really small phones */
+@media (max-width: 480px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+
+    .btn {
+        padding: 0.9rem 2rem;
+        font-size: 0.8rem;
+    }
+
+    .logo {
+        height: 90px; /* even smaller logo on tiny screens */
+    }
+
+    .navbar.scrolled .logo {
+        height: 75px;
+    }
+
+    .contact-form {
+        padding: 2rem 1rem;
+    }
+
+    .portfolio-item {
+        height: 350px;
+    }
+
+    .section {
+        padding: 4rem 5%;
+    }
+
+    .about-section {
+        padding: 5rem 5%;
+    }
+
+    .hero-image {
+        padding: 2rem 5%;
+        margin-top: 110px;
+        height: calc(100vh - 110px - 4rem);
+    }
+
+    .nav-links {
+        width: 80%; /* wider menu on small screens */
+    }
+
+    .submit-btn {
+        width: 100%; /* full width button on mobile */
+    }
+}
